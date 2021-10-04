@@ -18,7 +18,7 @@ function addBookToLibrary(book) {
     library.push(book);
 }
 
-function displayLibrary(lib) {
+function logLibrary(lib) {
     for (let i in library) {
         console.log(library[i].info());
     }
