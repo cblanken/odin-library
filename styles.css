@@ -20,25 +20,38 @@ time, mark, audio, video {
 }
 
 html {
-  background-color: orange;
+  background-color: darkorange;
+}
+
+h1 {
+  font: normal 5rem "Oleo Script", cursive;
+  text-align: right;
+  margin: 2rem;
+  padding: 0 1rem;
+  color: #EBF7FC;
+  border-bottom: 8px solid #EBF7FC;
+  border-right: 4px solid #EBF7FC;
+  border-bottom-right-radius: 20px;
 }
 
 #library {
   display: flex;
   flex-wrap: wrap;
+  gap: 20px;
+  margin: 30px;
 }
 
 .book-card {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  flex: 1;
+  gap: 0.5rem;
   background-color: #1D2021;
   color: white;
   border: 4px inset white;
   border-radius: 15px;
-  margin: 1.5rem;
   padding: 1.5rem;
-  max-width: 33%;
+  min-width: 25%;
 }
 
 .book-card .title {
@@ -46,19 +59,38 @@ html {
 }
 
 .book-card .author {
-  font: normal 1.25rem Arial, sans-serif;
+  font: normal 1.5rem Arial, sans-serif;
 }
 
 .book-card .series {
-
+  font-size: 1.25;
 }
 
 .book-card .pages {
-
+  font-size: 1.25;
 }
 
 .book-card .read-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
+.book-card .read-status-label {
+  font: bold 1.1rem bold monospace;
+}
+
+.book-card .read-status-toggle {
+  background-color: #EBF7FC; 
+  width: 15px;
+  height: 15px;
+}
+
+.book-card .del-button {
+  background-color: red;  
+  color: #ECECEC;
+  font: bold 3rem monospace;
+  border-radius: 3px;
 }
 
 
