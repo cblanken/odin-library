@@ -46,6 +46,7 @@ h1 {
   flex-direction: column;
   flex: 1;
   gap: 0.5rem;
+  contain: paint; /* necessary to contain absolute position of delete button */
   background-color: #1D2021;
   color: white;
   border: 4px inset white;
@@ -87,10 +88,21 @@ h1 {
 }
 
 .book-card .del-button {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  height: 2.25rem;
+  width: 2.25rem;
   background-color: red;  
   color: #ECECEC;
-  font: bold 3rem monospace;
-  border-radius: 3px;
+  font: bold 1.1rem monospace;
+  border-radius: 5px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.book-card .del-button:hover {
+  color: white;
 }
 
 

@@ -70,15 +70,23 @@ const LibraryFactory = (id, name, books=[]) => {
 
         const deleteBookBtn = document.createElement("button")
         deleteBookBtn.classList.toggle("del-button");
-
+        deleteBookBtn.innerHTML = `<i class="far fa-trash-alt"></i>`;
+        deleteBookBtn.addEventListener("click", () => {
+            removeBook(book); 
+        });
+        card.appendChild(deleteBookBtn);
+        
         container.appendChild(card);
     };
 
-    const removeBookById = (book) => {
+    const removeBook = (book) => {
         const index = books.findIndex(x => x.id === book.id);
         try {
-            if (index) {
-                books.splice(index);
+            if (index != undefined) {
+                books.splice(index, 1);
+                // Select book card by id and delete
+                const card = $(`.book-card[data-id="${book.id}"]`)
+                card.remove();
             }
             else {
                 alert(`${books[index]} could not be found in the library.`);
@@ -100,7 +108,7 @@ const LibraryFactory = (id, name, books=[]) => {
         }
     };
 
-    return {id, name, addBook, removeBookById, addBookCard}
+    return {id, name, books, addBook, removeBook, addBookCard}
 };
 
 function logLibrary(lib) {
