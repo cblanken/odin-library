@@ -34,7 +34,7 @@ h1 {
   border-bottom-right-radius: 20px;
 }
 
-#library {
+.library {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
