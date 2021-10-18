@@ -21,6 +21,21 @@ const LibraryFactory = (id, name, books=[]) => {
     container.classList.toggle("library");
     $("main").appendChild(container);
 
+    // Add book button
+    const addBookButton = document.createElement("button");
+    addBookButton.classList.toggle("add-book-button");
+    addBookButton.textContent = "+"; 
+
+    addBookButton.addEventListener("click", () => {
+        const modal = $("#add-book-popup");
+        //modal.style.visibility = "visible";
+        //modal.style.display = "block";
+        modal.classList.toggle("reveal-modal");
+    });
+    $("body").appendChild(addBookButton);
+
+
+
     const addBookCard = (book) => {
         const card = document.createElement("section"); 
         card.classList.toggle("book-card");
@@ -122,15 +137,9 @@ function logLibrary(lib) {
 const b1 = new Book(1, "The Hobbit", "J.R.R. Tolkien", 227, true);
 const b2 = new Book(2, "The Fellowship of the Ring", "J.R.R. Tolkien", 371, true);
 const b3 = new Book(3, "The Silmarillian", "J.R.R. Tolkien", 408, false);
-const b4 = new Book(4, "The Silmarillian", "J.R.R. Tolkien", 408, false);
-const b5 = new Book(5, "The Silmarillian", "J.R.R. Tolkien", 408, false);
-const b6 = new Book(6, "The Silmarillian", "J.R.R. Tolkien", 408, false);
 
 lib1 = LibraryFactory(1, "Home");
 lib1.addBook(b1);
 lib1.addBook(b2);
 lib1.addBook(b3);
-lib1.addBook(b4);
-lib1.addBook(b5);
-lib1.addBook(b6);
 

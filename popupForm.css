@@ -22,7 +22,8 @@ body {
   display: flex;  
   flex-direction: column;
   min-height: 100vh;
-  background-color: #232121
+  background-color: transparent;
+  z-index: 99;
 }
 
 h1 {
@@ -30,31 +31,33 @@ h1 {
   margin: 1rem auto;
 }
 
-#popup {
+#add-book-popup {
   display: flex; 
   flex-direction: column;
   font: bold 2rem monospace;
   color: #ECECEC;
   margin: auto; 
   padding: 1.5rem;
-  width: 75%;
+  width: 60%;
   border: 4px solid #ECECEC;
-  border-radius: 1rem;
+  border-radius: 2px;
+  /*background-color: #232121;*/
+  background-color: #3C773C;
 }
 
-#popup form ul {
+#add-book-popup form ul {
   display: flex;
   flex-direction: column;
 }
 
-#popup form li {
+#add-book-popup form li {
   display: flex;
   align-items: center;
   list-style-type: none;
   margin: 4px 0;
 }
 
-#popup input {
+#add-book-popup input {
   flex-grow: 1;
   vertical-align: middle;
   padding: 0;
@@ -66,12 +69,12 @@ h1 {
   padding: 5px;
 }
 
-#popup label {
+#add-book-popup label {
   display: inline-block;
   vertical-align: middle;
 }
 
-#popup button[name="submit-button"] {
+#add-book-popup button[name="submit-button"] {
   display: inline-flex;
   justify-content: center;
   align-items: center;

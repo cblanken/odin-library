@@ -23,6 +23,12 @@ html {
   background-color: darkorange;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 h1 {
   font: normal 5rem "Oleo Script", cursive;
   text-align: right;
@@ -105,4 +111,40 @@ h1 {
   color: white;
 }
 
+.add-book-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  height: 2.5rem;
+  width: 2.5rem;
+  margin-top: auto;
+  background-color: green;
+  color: #ECECEC;
+  border-radius: 5px;
+  border: 2px solid white;
+  font: bold 3rem "Times New Roman";
+  z-index: 1;
+}
 
+.add-book-button:hover {
+  color: white;
+}
+
+#add-book-popup {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  position: absolute;
+  visibility: hidden;
+  display: none;
+  background-color: rgba(22,22,22,0.5); /* complimenting your modal colors */
+  z-index: 99;
+}
+
+#add-book-popup.reveal-modal {
+  visibility: visible;
+  display: block;
+}
