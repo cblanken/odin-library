@@ -11,11 +11,11 @@
   <body>
     <main id="add-book-popup">
       <h1>New Book</h1>
-      <form>
+      <form action="./index.html" method="POST">
         <ul>
           <li>
             <label for="name">Name</label>
-            <input name="name" type="text"></input>
+            <input required name="name" type="text"></input>
           </li>
           <li>
             <label for="authors">Authors</label>
@@ -23,13 +23,16 @@
           </li>
           <li>
             <label for="page-count">Page Count</label>
-            <input name="page-count" type="number" min="0", max="99999" step="1"></input>
+            <input required name="page-count" type="number" min="0", max="99999" step="1"></input>
           </li>
           <li>
             <label for="completion-status">Completion Status</label>
             <input name="completion-status" type="button" placeholder="completed"></input>
           </li>
-          <button name="submit-button" type="submit" value="add-book">DONE</input>
+          <div id="buttons">
+            <button class="modal-button" name="cancel-button" type="button">Cancel</button>
+            <button class="modal-button" name="submit-button" type="button">Ok</button>
+          <div>
         </ul>
       </form>
     </main>

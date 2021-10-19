@@ -41,7 +41,6 @@ h1 {
   width: 60%;
   border: 4px solid #ECECEC;
   border-radius: 2px;
-  /*background-color: #232121;*/
   background-color: #3C773C;
 }
 
@@ -67,6 +66,7 @@ h1 {
   margin: 0 1rem;
   overflow: hidden;
   padding: 5px;
+  font-size: 1.25rem;
 }
 
 #add-book-popup label {
@@ -74,16 +74,27 @@ h1 {
   vertical-align: middle;
 }
 
-#add-book-popup button[name="submit-button"] {
+.modal-button {
   display: inline-flex;
-  justify-content: center;
   align-items: center;
-  align-self: flex-end;
   height: 2rem;
   width: auto;
-  margin-top: 1rem;
-  font: bold 1.25rem Courier, monospace;
   padding: 0 10px;
+  font: bold 1.25rem Courier, monospace;
+}
+
+#add-book-popup button[name="submit-button"] {
   background-color: #80FF80;
 }
 
+#add-book-popup button[name="cancel-button"] {
+  background-color: #FF8080;
+}
+
+#buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 1rem;
+}

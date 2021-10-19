@@ -28,13 +28,9 @@ const LibraryFactory = (id, name, books=[]) => {
 
     addBookButton.addEventListener("click", () => {
         const modal = $("#add-book-popup");
-        //modal.style.visibility = "visible";
-        //modal.style.display = "block";
         modal.classList.toggle("reveal-modal");
     });
     $("body").appendChild(addBookButton);
-
-
 
     const addBookCard = (book) => {
         const card = document.createElement("section"); 
@@ -132,7 +128,6 @@ function logLibrary(lib) {
     }
 }
 
-
 // Sample library
 const b1 = new Book(1, "The Hobbit", "J.R.R. Tolkien", 227, true);
 const b2 = new Book(2, "The Fellowship of the Ring", "J.R.R. Tolkien", 371, true);
@@ -143,3 +138,14 @@ lib1.addBook(b1);
 lib1.addBook(b2);
 lib1.addBook(b3);
 
+window.addEventListener("message", (event) => {
+    // TODO add origin check for security
+    //if (event.origin !== "./popupBookForm.html")
+        //return;
+    if (event.data.action === "add") {
+        const book = new Book(event.data.name, event.data.authors, event.data.pageCount, event.data.completionStatus);
+        lib1.addBook(book);
+    }
+    // Hide popup
+    $("#add-book-popup").classList.toggle("reveal-modal");
+}, false);
