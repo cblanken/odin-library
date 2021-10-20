@@ -9,6 +9,7 @@ function Book(id, title, author=null, pageCount=null, isRead=false, series=null)
     this.author = author;
     this.pageCount = pageCount;
     this.isRead = isRead;
+    this.series = series;
 }
 
 Book.prototype.info = function() {
@@ -152,13 +153,33 @@ function logLibrary(lib) {
     }
 }
 
+function generateAvailableIndex(books) {
+    // Find available index
+    let index = 0;
+    do {
+        // Regenerate index until one unused is found
+        index = Math.floor(Math.random() * 99999);
+    } while (books.find((x) => { x.id === index; }) !== undefined)
+
+    return index;
+}
+
 window.addEventListener("message", (event) => {
     // TODO add origin check for security
     //if (event.origin !== "./popupBookForm.html")
         //return;
     if (event.data.action === "add") {
-        const book = new Book(event.data.name, event.data.authors, 
-            event.data.pageCount, event.data.completionStatus);
+        console.log(event.data.completionStatus);
+        let book = new Book(
+            id = generateAvailableIndex(lib.books),
+            title = event.data.name,
+            author = event.data.authors, 
+            pageCount = event.data.pageCount,
+            isRead = event.data.completionStatus,
+            series = event.data.series
+        );
+
+        console.log(book);
         lib.addBook(book);
     }
     // Hide popup
@@ -170,7 +191,6 @@ window.addEventListener("message", (event) => {
 let books = window.localStorage.getItem("books");
 if (books) {
     console.log("Books found in local storage. Loading books into library...");
-    //books = [...JSON.parse(books)];
     books = JSON.parse(books);
 } else {
     console.log("No books found in local storage. Loading empty library...");

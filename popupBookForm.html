@@ -13,21 +13,21 @@
       <h1>New Book</h1>
       <form action="./index.html" method="POST">
         <ul>
-          <li>
+          <li class="text-input">
             <label for="name">Name</label>
             <input required name="name" type="text"></input>
           </li>
-          <li>
+          <li class="text-input">
             <label for="authors">Authors</label>
             <input name="authors" type="text"></input>
           </li>
-          <li>
+          <li class="number-input">
             <label for="page-count">Page Count</label>
             <input required name="page-count" type="number" min="0", max="99999" step="1"></input>
           </li>
-          <li>
+          <li class="boolean-input">
             <label for="completion-status">Completion Status</label>
-            <input name="completion-status" type="button" placeholder="completed"></input>
+            <input name="completion-status" type="checkbox"></input>
           </li>
           <div id="buttons">
             <button class="modal-button" name="cancel-button" type="button">Cancel</button>

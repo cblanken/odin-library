@@ -49,11 +49,22 @@ h1 {
   flex-direction: column;
 }
 
-#add-book-popup form li {
+.text-input,
+.number-input {
   display: flex;
   align-items: center;
   list-style-type: none;
   margin: 4px 0;
+}
+
+.boolean-input {
+  list-style-type: none;
+}
+
+#add-book-popup label + input[type="checkbox"] {
+  margin: 0;
+  height: 1.5rem;
+  width: 1.5rem;
 }
 
 #add-book-popup input {

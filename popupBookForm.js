@@ -16,7 +16,7 @@ submitBtn.addEventListener("click", (event) => {
         name: $("input[name='name']").value,
         authors: $("input[name='authors']").value,
         pageCount: $("input[name='page-count']").value,
-        completionStatus: $("input[name='completion-status']").value
+        completionStatus: $("input[name='completion-status']").checked
     }
     window.parent.postMessage(message, '*'); // TODO change '*' to appropriate origin for security
     clearInputs();
