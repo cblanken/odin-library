@@ -16,6 +16,12 @@ Book.prototype.info = function() {
 }
 
 const LibraryFactory = (id, name, books=[]) => {
+    // Type checks
+    if (Array.isArray(books) === false) {
+        books = [];
+        console.log(`Library: ${name} was not given a valid array. Reset to empty`);
+    }
+
     // Initialize display elements
     const container = document.createElement("div");
     container.classList.toggle("library");
@@ -98,6 +104,7 @@ const LibraryFactory = (id, name, books=[]) => {
                 // Select book card by id and delete
                 const card = $(`.book-card[data-id="${book.id}"]`)
                 card.remove();
+                removeBookFromLocalStorage(book);
             }
             else {
                 alert(`${books[index]} could not be found in the library.`);
@@ -110,14 +117,31 @@ const LibraryFactory = (id, name, books=[]) => {
     };
 
     const addBook = (book) => {
-        const id = books.find(x => x.id === book.id);
-        if (id === undefined) {
+        const newBook = books.find(x => x.id === book.id);
+        if (newBook === undefined) {
             books.push(book);
             addBookCard(book);
+            addBookToLocalStorage(book);
         } else {
             alert(`Book with id=${book.id} already exists. Book was not added`);
         }
     };
+
+    const addBookToLocalStorage = (book) => {
+        let books = JSON.parse(window.localStorage.getItem("books"));
+        books.push(book);
+        window.localStorage.setItem("books", JSON.stringify(books));
+    }
+    
+    const removeBookFromLocalStorage = (book) => {
+        let books = JSON.parse(window.localStorage.getItem("books"));
+        const i = books.findIndex((x) => { x.id === book.id; });
+        books.splice(i);
+        window.localStorage.setItem("books", JSON.stringify(books));
+    }
+
+    // Add cards for any provided books 
+    books.forEach(book => addBookCard(book));
 
     return {id, name, books, addBook, removeBook, addBookCard}
 };
@@ -128,24 +152,31 @@ function logLibrary(lib) {
     }
 }
 
-// Sample library
-const b1 = new Book(1, "The Hobbit", "J.R.R. Tolkien", 227, true);
-const b2 = new Book(2, "The Fellowship of the Ring", "J.R.R. Tolkien", 371, true);
-const b3 = new Book(3, "The Silmarillian", "J.R.R. Tolkien", 408, false);
-
-lib1 = LibraryFactory(1, "Home");
-lib1.addBook(b1);
-lib1.addBook(b2);
-lib1.addBook(b3);
-
 window.addEventListener("message", (event) => {
     // TODO add origin check for security
     //if (event.origin !== "./popupBookForm.html")
         //return;
     if (event.data.action === "add") {
-        const book = new Book(event.data.name, event.data.authors, event.data.pageCount, event.data.completionStatus);
-        lib1.addBook(book);
+        const book = new Book(event.data.name, event.data.authors, 
+            event.data.pageCount, event.data.completionStatus);
+        lib.addBook(book);
     }
     // Hide popup
     $("#add-book-popup").classList.toggle("reveal-modal");
 }, false);
+
+
+// Initialize library instance
+let books = window.localStorage.getItem("books");
+if (books) {
+    console.log("Books found in local storage. Loading books into library...");
+    //books = [...JSON.parse(books)];
+    books = JSON.parse(books);
+} else {
+    console.log("No books found in local storage. Loading empty library...");
+    books = []; 
+}
+
+const lib = LibraryFactory(1, "Home", books);
+
+
