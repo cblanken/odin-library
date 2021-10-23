@@ -20,13 +20,14 @@ time, mark, audio, video {
 }
 
 html {
-  background-color: darkorange;
+  background: content-box radial-gradient(farthest-corner at 25%, lightgreen, #547054);
 }
 
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background: repeat url(./circuit-bg.svg);
 }
 
 h1 {
