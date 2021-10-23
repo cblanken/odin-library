@@ -129,15 +129,15 @@ const LibraryFactory = (id, name, books=[]) => {
     };
 
     const addBookToLocalStorage = (book) => {
-        let books = JSON.parse(window.localStorage.getItem("books"));
-        books.push(book);
+        let storage = JSON.parse(window.localStorage.getItem("books"));
+        storage.push(book);
         window.localStorage.setItem("books", JSON.stringify(books));
     }
     
     const removeBookFromLocalStorage = (book) => {
-        let books = JSON.parse(window.localStorage.getItem("books"));
-        const i = books.findIndex((x) => { x.id === book.id; });
-        books.splice(i);
+        let storage = JSON.parse(window.localStorage.getItem("books"));
+        const i = storage.findIndex((x) => { x.id === book.id; });
+        storage.splice(i);
         window.localStorage.setItem("books", JSON.stringify(books));
     }
 
