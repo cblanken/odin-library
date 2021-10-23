@@ -169,7 +169,6 @@ window.addEventListener("message", (event) => {
     //if (event.origin !== "./popupBookForm.html")
         //return;
     if (event.data.action === "add") {
-        console.log(event.data.completionStatus);
         let book = new Book(
             id = generateAvailableIndex(lib.books),
             title = event.data.name,
@@ -179,7 +178,6 @@ window.addEventListener("message", (event) => {
             series = event.data.series
         );
 
-        console.log(book);
         lib.addBook(book);
     }
     // Hide popup
