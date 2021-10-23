@@ -129,7 +129,7 @@ const LibraryFactory = (id, name, books=[]) => {
     };
 
     const addBookToLocalStorage = (book) => {
-        let storage = JSON.parse(window.localStorage.getItem("books"));
+        let storage = JSON.parse(window.localStorage.getItem("books")) ?? [];
         storage.push(book);
         window.localStorage.setItem("books", JSON.stringify(books));
     }
