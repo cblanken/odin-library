@@ -18,30 +18,37 @@ class Book {
     }
 }
 
-const LibraryFactory = (id, name, books=[]) => {
-    // Type checks
-    if (Array.isArray(books) === false) {
-        books = [];
-        console.log(`Library: ${name} was not given a valid array. Reset to empty`);
+class Library {
+    constructor (id, name, books=[]) {
+        if (Array.isArray(books) === false) {
+            books = [];
+            console.log(`Library: ${name} was not given a valid array. Reset to empty`);
+        }
+        this.id = id;
+        this.name = name;
+        this.books = books;
+        
+        // Initialize display elements
+        this.container = document.createElement("div");
+        this.container.classList.toggle("library");
+        $("main").appendChild(this.container);
+
+        // Add book button
+        const addBookButton = document.createElement("button");
+        addBookButton.classList.toggle("add-book-button");
+        addBookButton.textContent = "+"; 
+
+        addBookButton.addEventListener("click", () => {
+            const modal = $("#add-book-popup");
+            modal.classList.toggle("reveal-modal");
+        });
+        $("body").appendChild(addBookButton);
+
+        // Add cards for any provided books 
+        books.forEach(book => this.addBookCard(book));
     }
 
-    // Initialize display elements
-    const container = document.createElement("div");
-    container.classList.toggle("library");
-    $("main").appendChild(container);
-
-    // Add book button
-    const addBookButton = document.createElement("button");
-    addBookButton.classList.toggle("add-book-button");
-    addBookButton.textContent = "+"; 
-
-    addBookButton.addEventListener("click", () => {
-        const modal = $("#add-book-popup");
-        modal.classList.toggle("reveal-modal");
-    });
-    $("body").appendChild(addBookButton);
-
-    const addBookCard = (book) => {
+    addBookCard(book) {
         const card = document.createElement("section"); 
         card.classList.toggle("book-card");
 
@@ -92,14 +99,14 @@ const LibraryFactory = (id, name, books=[]) => {
         deleteBookBtn.classList.toggle("del-button");
         deleteBookBtn.innerHTML = `<i class="far fa-trash-alt"></i>`;
         deleteBookBtn.addEventListener("click", () => {
-            removeBook(book); 
+            this.removeBook(book); 
         });
         card.appendChild(deleteBookBtn);
         
-        container.appendChild(card);
+        this.container.appendChild(card);
     };
 
-    const removeBook = (book) => {
+    removeBook(book) {
         const index = books.findIndex(x => x.id === book.id);
         try {
             if (index != undefined) {
@@ -107,7 +114,7 @@ const LibraryFactory = (id, name, books=[]) => {
                 // Select book card by id and delete
                 const card = $(`.book-card[data-id="${book.id}"]`)
                 card.remove();
-                removeBookFromLocalStorage(book);
+                this.removeBookFromLocalStorage(book);
             }
             else {
                 alert(`${books[index]} could not be found in the library.`);
@@ -119,35 +126,30 @@ const LibraryFactory = (id, name, books=[]) => {
         }
     };
 
-    const addBook = (book) => {
+    addBook(book) {
         const newBook = books.find(x => x.id === book.id);
         if (newBook === undefined) {
             books.push(book);
-            addBookCard(book);
-            addBookToLocalStorage(book);
+            this.addBookCard(book);
+            this.addBookToLocalStorage(book);
         } else {
             alert(`Book with id=${book.id} already exists. Book was not added`);
         }
     };
 
-    const addBookToLocalStorage = (book) => {
+    addBookToLocalStorage(book) {
         let storage = JSON.parse(window.localStorage.getItem("books")) ?? [];
         storage.push(book);
         window.localStorage.setItem("books", JSON.stringify(books));
     }
-    
-    const removeBookFromLocalStorage = (book) => {
+
+    removeBookFromLocalStorage(book) {
         let storage = JSON.parse(window.localStorage.getItem("books"));
         const i = storage.findIndex((x) => { x.id === book.id; });
         storage.splice(i);
         window.localStorage.setItem("books", JSON.stringify(books));
     }
-
-    // Add cards for any provided books 
-    books.forEach(book => addBookCard(book));
-
-    return {id, name, books, addBook, removeBook, addBookCard}
-};
+}
 
 function logLibrary(lib) {
     for (let i in library) {
@@ -187,7 +189,7 @@ window.addEventListener("message", (event) => {
 }, false);
 
 
-// Initialize library instance
+// Initialize library and load local storage
 let books = window.localStorage.getItem("books");
 if (books) {
     console.log("Books found in local storage. Loading books into library...");
@@ -197,6 +199,6 @@ if (books) {
     books = []; 
 }
 
-const lib = LibraryFactory(1, "Home", books);
+const lib = new Library(1, "Home", books);
 
 
