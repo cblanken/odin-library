@@ -3,17 +3,19 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
-function Book(id, title, author=null, pageCount=null, isRead=false, series=null) {
-    this.id = id;
-    this.title = title;
-    this.author = author;
-    this.pageCount = pageCount;
-    this.isRead = isRead;
-    this.series = series;
-}
+class Book {
+    constructor (id, title, author=null, pageCount=null, isRead=false, series=null) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.pageCount = pageCount;
+        this.isRead = isRead;
+        this.series = series;
+    }
 
-Book.prototype.info = function() {
-    return `${this.title} by ${this.author}, ${this.pageCount} pages, has ${this.isRead ? "" : "not"}been read}`;  
+    info() {
+        return `${this.title} by ${this.author}, ${this.pageCount} pages, has ${this.isRead ? "" : "not"}been read}`;  
+    }
 }
 
 const LibraryFactory = (id, name, books=[]) => {
